@@ -81,7 +81,7 @@ pub fn eval(arena: &TermArena, term: TermRef, env: &Env) -> Result<Value, String
             let arg_val = eval(arena, *arg_term, env)?; // TODO do we want to be eager?
             match arena.get(fn_val) {
                 Term::Lam(body) => {
-                    let mut new_env = defenv.clone(); // FIXME, don't clone
+                    let mut new_env = defenv;
                     new_env.extend(arg_val);
                     eval(arena, *body, &new_env)
                 }
